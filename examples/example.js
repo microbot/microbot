@@ -2,7 +2,7 @@
 
 var BaseBot = require('../');
 var bot = new BaseBot({a: 'b'});
-bot.when({c: 'd'}, function(payload, options) {
+bot.when(function(payload, options) {
   console.log(payload);
   //=> {foo: 'bar'}
   console.log(options);
@@ -10,7 +10,7 @@ bot.when({c: 'd'}, function(payload, options) {
   return Promise.resolve({bar: 'baz'});
 });
 
-bot.dispatch({foo: 'bar'})
+bot.dispatch({foo: 'bar'}, {c: 'd'})
   .then(function(results) {
     console.log(results);
   })
