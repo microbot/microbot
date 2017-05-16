@@ -1,0 +1,29 @@
+{
+  "name": "bot-github-comment-post",
+  "description": "Cyborg bot helper that posts a comment to a GitHub issue.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cyborgjs/bot-github-comment-post",
+  "author": "Brian Woodward (https://doowb.com)",
+  "repository": "cyborgjs/bot-github-comment-post",
+  "bugs": {
+    "url": "https://github.com/cyborgjs/bot-github-comment-post/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "LICENSE"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "bot",
+    "comment",
+    "github",
+    "post"
+  ]
+}
