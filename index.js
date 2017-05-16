@@ -27,7 +27,7 @@ function BotBase(options) {
   this.use(plugin());
   this.use(option());
 
-  this.define('_actions', {})
+  this.define('actions', {})
 }
 
 /**
@@ -61,8 +61,7 @@ BotBase.prototype.when = function(options, fn) {
     options = {};
   }
 
-  var opts = utils.extend({}, options);
-  this.action('when', utils.when(opts, fn));
+  this.action('when', options, fn);
   return this;
 };
 
@@ -86,10 +85,16 @@ BotBase.prototype.when = function(options, fn) {
  * @api public
  */
 
-BotBase.prototype.action = function(name, fn) {
+BotBase.prototype.action = function(name, options, fn) {
+  if (typeof options === 'function') {
+    fn = options;
+    options = {};
+  }
+
   if (typeof fn === 'function') {
     debug('setting action handler "%s"', name);
-    this.actions[name] = fn;
+    var opts = utils.extend({}, options);
+    this.actions[name] = utils.wrapAction(options, fn);
     return this;
   }
   debug('getting action handler "%s"', name);
@@ -100,13 +105,13 @@ BotBase.prototype.action = function(name, fn) {
  * Dispatches a payload by calling the registered action handler function.
  *
  * ```js
- * bot.dispatch('action', {foo: 'bar'})
+ * bot.dispatch({foo: 'bar'})
  *   .then(function(results) {
  *     console.log(results);
  *     //=> {bar: 'baz'}
  *   });
  * ```
- * @param  {String} `name` Name of the action to dispatch
+ * @param  {String} `name` Name of the action to dispatch. Defaults to "when".
  * @param  {Object} `payload` Payload object to send to the action handler function.
  * @param  {Object} `options` Additional options to send to the action handler function.
  * @return {Promise} Returns a promise after the action handler function has resolved.
@@ -114,14 +119,23 @@ BotBase.prototype.action = function(name, fn) {
  */
 
 BotBase.prototype.dispatch = function(name, payload, options) {
-  this.emit('dispatch', payload);
+  if (typeof name !== 'string') {
+    options = payload;
+    payload = name;
+    name = 'when';
+  }
+
   var action = this.action(name);
   if (!action) {
     debug('action handler "%s" could not be found to dispatch', name);
     return Promise.resolve();
   }
   debug('dispatching payload %j to action handler "%s"', payload, name);
-  return Promise.resolve(action.call(this, payload, options));
+
+  var before = this.action(`before_${name}`);
+  var after = this.action(`after_${name}`);
+  return utils.series(this, [before, action, after], payload, options);
+  // return Promise.resolve(action.call(this, payload, options));
 };
 
 /**
