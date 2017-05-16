@@ -40,7 +40,7 @@ Base.extend(BotBase);
  * Register a handler function to be called when the bot is activated.
  *
  * ```js
- * bot.when({c: 'd'}, function(payload, options) {
+ * bot.when(function(payload, options) {
  *   console.log(payload);
  *   //=> {foo: 'bar'}
  *   console.log(options);
@@ -48,23 +48,16 @@ Base.extend(BotBase);
  *   return Promise.resolve({bar: 'baz'});
  * });
  * ```
- * @param  {Object} `options` Additional options to pass to the handler function.
  * @param  {Function} `fn` Handler function that will be called with a `payload` and `options`. The handler function should return a `Promise`.
  * @return {Object} Returns `this` for chaining
  * @api public
  */
 
-BotBase.prototype.when = function(options, fn) {
+BotBase.prototype.when = function(fn) {
   debug('adding `when` action handler');
-  if (typeof options === 'function') {
-    fn = options;
-    options = {};
-  }
-
-  this.action('when', options, fn);
+  this.action('when', fn);
   return this;
 };
-
 
 /**
  * Register an action handler function using the given name.
@@ -85,27 +78,21 @@ BotBase.prototype.when = function(options, fn) {
  * @api public
  */
 
-BotBase.prototype.action = function(name, options, fn) {
-  if (typeof options === 'function') {
-    fn = options;
-    options = {};
-  }
-
+BotBase.prototype.action = function(name, fn) {
   if (typeof fn === 'function') {
     debug('setting action handler "%s"', name);
-    var opts = utils.extend({}, options);
-    this.actions[name] = utils.wrapAction(options, fn);
+    this.union(['actions', utils.rename(name)], utils.wrapAction(fn));
     return this;
   }
   debug('getting action handler "%s"', name);
-  return this.actions[name];
+  return this.get(['actions', utils.rename(name)]);
 };
 
 /**
  * Dispatches a payload by calling the registered action handler function.
  *
  * ```js
- * bot.dispatch({foo: 'bar'})
+ * bot.dispatch({foo: 'bar'}, {c: 'd'})
  *   .then(function(results) {
  *     console.log(results);
  *     //=> {bar: 'baz'}
@@ -125,17 +112,36 @@ BotBase.prototype.dispatch = function(name, payload, options) {
     name = 'when';
   }
 
-  var action = this.action(name);
-  if (!action) {
+  var actions = this.resolveActions(name);
+  if (!actions) {
     debug('action handler "%s" could not be found to dispatch', name);
     return Promise.resolve();
   }
   debug('dispatching payload %j to action handler "%s"', payload, name);
-
-  var before = this.action(`before_${name}`);
-  var after = this.action(`after_${name}`);
-  return utils.series(this, [before, action, after], payload, options);
+  return utils.series(this, actions, payload, options);
   // return Promise.resolve(action.call(this, payload, options));
+};
+
+BotBase.prototype.resolveActions = function(name) {
+  var action = this.action(name);
+  if (!action) {
+    return;
+  }
+
+  /**
+   * before - before any actions
+   * before.${action} - before current action
+   * ${action} - current action
+   * after.${action} - before current action
+   * after - after any action
+   */
+  return [
+    ...(this.action('before') || []),
+    ...(this.action(`before.${name}`) || []),
+    ...action,
+    ...(this.action(`after.${name}`) || []),
+    ...(this.action('after') || [])
+  ];
 };
 
 /**
