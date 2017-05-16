@@ -1,0 +1,27 @@
+{
+  "name": "bot-base",
+  "description": "Base for creating cyborg bots.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cyborgjs/bot-base",
+  "author": "Brian Woodward (https://doowb.com)",
+  "repository": "cyborgjs/bot-base",
+  "bugs": {
+    "url": "https://github.com/cyborgjs/bot-base/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "LICENSE"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "base",
+    "bot"
+  ]
+}
