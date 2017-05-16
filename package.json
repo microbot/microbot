@@ -19,15 +19,15 @@
   "scripts": {
     "test": "mocha"
   },
+  "dependencies": {
+    "extend-shallow": "^2.0.1",
+    "github-base": "^0.5.4",
+    "koalas": "^1.0.2"
+  },
   "keywords": [
     "bot",
     "comment",
     "github",
     "post"
-  ],
-  "dependencies": {
-    "extend-shallow": "^2.0.1",
-    "github-base": "^0.5.4",
-    "koalas": "^1.0.2"
-  }
+  ]
 }
