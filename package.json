@@ -20,6 +20,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "bot-github-auth": "^0.1.0",
     "extend-shallow": "^2.0.1",
     "github-base": "^0.5.4",
     "koalas": "^1.0.2"
