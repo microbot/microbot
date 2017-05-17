@@ -10,7 +10,8 @@
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "main": "index.js",
   "engines": {
@@ -19,15 +20,15 @@
   "scripts": {
     "test": "mocha"
   },
-  "keywords": [
-    "base",
-    "bot"
-  ],
   "dependencies": {
     "base": "^0.13.0",
     "base-options": "^0.6.0",
     "base-plugins": "^1.0.0",
     "debug": "^2.6.6",
     "extend-shallow": "^2.0.1"
-  }
+  },
+  "keywords": [
+    "base",
+    "bot"
+  ]
 }
