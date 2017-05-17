@@ -1,7 +1,7 @@
 {
   "name": "bot-base",
   "description": "Base for creating cyborg bots.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/cyborgjs/bot-base",
   "author": "Brian Woodward (https://doowb.com)",
   "repository": "cyborgjs/bot-base",
