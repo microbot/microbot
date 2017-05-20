@@ -27,13 +27,13 @@
     "debug": "^2.6.6",
     "extend-shallow": "^2.0.1"
   },
+  "devDependencies": {
+    "gulp-format-md": "^0.1.12"
+  },
   "keywords": [
     "base",
     "bot"
   ],
-  "devDependencies": {
-    "gulp-format-md": "^0.1.12"
-  },
   "verb": {
     "toc": false,
     "layout": "default",
