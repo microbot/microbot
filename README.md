@@ -1,17 +1,17 @@
-# bot-github-comment-post [![NPM version](https://badge.fury.io/js/bot-github-comment-post.svg)](https://npmjs.org/package/bot-github-comment-post) [![Build Status](https://travis-ci.org/cyborgjs/bot-github-comment-post.svg?branch=master)](https://travis-ci.org/cyborgjs/bot-github-comment-post)
+# microbot [![NPM version](https://badge.fury.io/js/microbot.svg)](https://npmjs.org/package/microbot) [![Build Status](https://travis-ci.org/microbot/microbot.svg?branch=master)](https://travis-ci.org/microbot/microbot)
 
 > Cyborg bot helper that posts a comment to a GitHub issue.
 
 ## Installation
 
 ```sh
-$ npm install --save bot-github-comment-post
+$ npm install --save microbot
 ```
 
 ## Usage
 
 ```js
-var botGithubCommentPost = require('bot-github-comment-post');
+var botGithubCommentPost = require('microbot');
 botGithubCommentPost();
 ```
 

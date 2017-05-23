@@ -1,12 +1,12 @@
 {
-  "name": "bot-github-comment-post",
-  "description": "Cyborg bot helper that posts a comment to a GitHub issue.",
+  "name": "microbot",
+  "description": "Cyborg microbot that posts a comment to a GitHub issue.",
   "version": "0.1.0",
-  "homepage": "https://github.com/cyborgjs/bot-github-comment-post",
+  "homepage": "https://github.com/microbot/microbot",
   "author": "Brian Woodward (https://doowb.com)",
-  "repository": "cyborgjs/bot-github-comment-post",
+  "repository": "microbot/microbot",
   "bugs": {
-    "url": "https://github.com/cyborgjs/bot-github-comment-post/issues"
+    "url": "https://github.com/microbot/microbot/issues"
   },
   "license": "MIT",
   "files": [

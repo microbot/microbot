@@ -1,7 +1,7 @@
 {
   "repository": {
-    "owner": {"login": "cyborgjs"},
-    "name": "bot-github-comment-post"
+    "owner": {"login": "microbot"},
+    "name": "microbot"
   },
   "issue": {
     "number": 1,
