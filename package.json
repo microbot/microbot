@@ -1,7 +1,7 @@
 {
   "name": "microbot",
   "description": "Cyborg microbot that posts a comment to a GitHub issue.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/microbot/microbot",
   "author": "Brian Woodward (https://doowb.com)",
   "repository": "microbot/microbot",
