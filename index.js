@@ -4,6 +4,26 @@ var Github = require('github-base');
 var extend = require('extend-shallow');
 var koalas = require('koalas');
 
+/**
+ * Cyborg microbot plugin for making a comment on a GitHub issue.
+ *
+ * ```js
+ * // given an issue opened event payload
+ * return Promise.resolve(payload)
+ *   .then(comment(function(payload) {
+ *     return "Hi " + payload.issue.user.login;
+ *   }))
+ *   .then(function(response) {
+ *     console.log(response.results);
+ *     //=> GitHub response payload
+ *   });
+ * ```
+ * @name comment
+ * @param  {Object} `config` Configuration object for passing authentication information to [bot-github-auth][].
+ * @return {Function} Plugin function that may be used in a Promise chain.
+ * @api public
+ */
+
 module.exports = function(config) {
   var github;
   var githubAuth = require('bot-github-auth')(config);
