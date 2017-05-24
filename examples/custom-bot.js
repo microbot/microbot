@@ -1,10 +1,10 @@
 'use strict';
 
 var utils = require('../lib/utils');
-var BaseBot = require('../');
+var Microbot = require('../');
 
-var bot = new BaseBot({a: 'b'});
-bot.use(function() {
+var microbot = new Microbot({a: 'b'});
+microbot.use(function() {
   this.action('before', function(payload, options) {
     console.log('before payload', payload);
     console.log('before options', options);
@@ -38,7 +38,7 @@ bot.use(function() {
   });
 });
 
-bot.when(function(payload, options) {
+microbot.when(function(payload, options) {
   console.log('when payload', payload);
   //=> {foo: 'bar'}
   console.log('when options', options);
@@ -47,7 +47,7 @@ bot.when(function(payload, options) {
   return Promise.resolve({bar: 'baz'});
 });
 
-bot.dispatch({foo: 'bar'}, {c: 'd'})
+microbot.dispatch({foo: 'bar'}, {c: 'd'})
   .then(function(results) {
     console.log('final results', results);
   })

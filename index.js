@@ -3,25 +3,25 @@ var Base = require('base');
 var plugin = require('base-plugins');
 var option = require('base-options');
 
-var debug = require('debug')('bot-base');
+var debug = require('debug')('microbot');
 var utils = require('./lib/utils');
 
 /**
- * Create a new BotBase instance with the provided options.
+ * Create a new Microbot instance with the provided options.
  *
  * ```js
- * var bot = new BotBase({a: 'b'});
+ * var microbot = new Microbot({a: 'b'});
  * ```
  *
- * @param {Object} `options` Options used to configure the new bot.
+ * @param {Object} `options` Options used to configure the new microbot.
  * @api public
  */
 
-function BotBase(options) {
-  if (!(this instanceof BotBase)) {
-    return new BotBase(options);
+function Microbot(options) {
+  if (!(this instanceof Microbot)) {
+    return new Microbot(options);
   }
-  debug('initializing BotBase');
+  debug('initializing Microbot');
 
   Base.call(this, null, options);
   this.use(plugin());
@@ -31,16 +31,16 @@ function BotBase(options) {
 }
 
 /**
- * Extend Base onto BotBase
+ * Extend Base onto Microbot
  */
 
-Base.extend(BotBase);
+Base.extend(Microbot);
 
 /**
- * Register a handler function to be called when the bot is activated.
+ * Register a handler function to be called when the microbot is activated.
  *
  * ```js
- * bot.when(function(payload, options) {
+ * microbot.when(function(payload, options) {
  *   console.log(payload);
  *   //=> {foo: 'bar'}
  *   console.log(options);
@@ -53,7 +53,7 @@ Base.extend(BotBase);
  * @api public
  */
 
-BotBase.prototype.when = function(fn) {
+Microbot.prototype.when = function(fn) {
   debug('adding `when` action handler');
   this.action('when', fn);
   return this;
@@ -63,10 +63,10 @@ BotBase.prototype.when = function(fn) {
  * Register an action handler function using the given name.
  *
  * ```js
- * bot.action('foo', function(payload, options) {
+ * microbot.action('foo', function(payload, options) {
  *   return Promise.resolve(payload.foo);
  * });
- * bot.dispatch('foo', {foo: 'bar'})
+ * microbot.dispatch('foo', {foo: 'bar'})
  *   .then(function(result) {
  *     console.log(result);
  *     //=> 'bar'
@@ -78,7 +78,7 @@ BotBase.prototype.when = function(fn) {
  * @api public
  */
 
-BotBase.prototype.action = function(name, fn) {
+Microbot.prototype.action = function(name, fn) {
   if (typeof fn === 'function') {
     debug('setting action handler "%s"', name);
     this.union(['actions', utils.rename(name)], utils.wrapAction(fn));
@@ -92,7 +92,7 @@ BotBase.prototype.action = function(name, fn) {
  * Dispatches a payload by calling the registered action handler function.
  *
  * ```js
- * bot.dispatch({foo: 'bar'}, {c: 'd'})
+ * microbot.dispatch({foo: 'bar'}, {c: 'd'})
  *   .then(function(results) {
  *     console.log(results);
  *     //=> {bar: 'baz'}
@@ -105,7 +105,7 @@ BotBase.prototype.action = function(name, fn) {
  * @api public
  */
 
-BotBase.prototype.dispatch = function(name, payload, options) {
+Microbot.prototype.dispatch = function(name, payload, options) {
   if (typeof name !== 'string') {
     options = payload;
     payload = name;
@@ -122,7 +122,7 @@ BotBase.prototype.dispatch = function(name, payload, options) {
   // return Promise.resolve(action.call(this, payload, options));
 };
 
-BotBase.prototype.resolveActions = function(name) {
+Microbot.prototype.resolveActions = function(name) {
   var action = this.action(name);
   if (!action) {
     return;
@@ -145,7 +145,7 @@ BotBase.prototype.resolveActions = function(name) {
 };
 
 /**
- * Exposes `BotBase`
+ * Exposes `Microbot`
  */
 
-module.exports = BotBase;
+module.exports = Microbot;

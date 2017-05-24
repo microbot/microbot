@@ -1,12 +1,12 @@
 {
-  "name": "bot-base",
-  "description": "Base for creating cyborg bots.",
-  "version": "0.1.1",
-  "homepage": "https://github.com/cyborgjs/bot-base",
+  "name": "microbot",
+  "description": "Create cyborg microbots to react to events and automate tasks.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/microbot/microbot",
   "author": "Brian Woodward (https://doowb.com)",
-  "repository": "cyborgjs/bot-base",
+  "repository": "microbot/microbot",
   "bugs": {
-    "url": "https://github.com/cyborgjs/bot-base/issues"
+    "url": "https://github.com/microbot/microbot/issues"
   },
   "license": "MIT",
   "files": [

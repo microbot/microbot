@@ -1,8 +1,8 @@
 'use strict';
 
-var BaseBot = require('../');
-var bot = new BaseBot({a: 'b'});
-bot.when(function(payload, options) {
+var Microbot = require('../');
+var microbot = new Microbot({a: 'b'});
+microbot.when(function(payload, options) {
   console.log(payload);
   //=> {foo: 'bar'}
   console.log(options);
@@ -10,7 +10,7 @@ bot.when(function(payload, options) {
   return Promise.resolve({bar: 'baz'});
 });
 
-bot.dispatch({foo: 'bar'}, {c: 'd'})
+microbot.dispatch({foo: 'bar'}, {c: 'd'})
   .then(function(results) {
     console.log(results);
   })
