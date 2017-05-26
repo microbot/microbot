@@ -1,6 +1,6 @@
 {
   "name": "microbot",
-  "description": "Create cyborg microbots to react to events and automate tasks.",
+  "description": "Runner of microbots.",
   "version": "1.0.0",
   "homepage": "https://github.com/microbot/microbot",
   "author": "Brian Woodward (https://doowb.com)",
@@ -36,7 +36,7 @@
   ],
   "verb": {
     "toc": false,
-    "layout": "default",
+    "layout": null,
     "tasks": [
       "readme"
     ],
